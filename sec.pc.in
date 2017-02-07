@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@prefix@/include
+
+Name: sec++
+Description: Technical analysis using Boost and tge STL
+URL: <homepage>
+Version: @VERSION@
+Requires:
+Libs: -L${libdir} -lstlta
+Cflags: -I${includedir}
