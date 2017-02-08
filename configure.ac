@@ -18,8 +18,6 @@ LT_INIT
 AX_BOOST_BASE([])
 
 # Checks for header files.
-AC_CHECK_HEADER([./CxxUrl/url.hpp],[],
-	AC_MSG_ERROR([CxxUrl needs to be downloaded with git. chmike/CxxUrl.git]))
 
 # Checks for typedefs, structures, and compiler characteristics.
 AX_CXX_COMPILE_STDCXX_11([ext],[mandatory])
