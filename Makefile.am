@@ -8,7 +8,7 @@ lib_LIBRARIES = libsec++.a
 libsec++_a_LDADD=
 libsec++_a_SOURCES = src/getCIK.cpp \
 	src/sec_info.cpp \
-	Cxxurl/url.cpp
+	CxxUrl/url.cpp
  
 pkgconfigdir = /usr/lib/pkgconfig
 pkgconfig_DATA = sec.pc
@@ -21,5 +21,5 @@ xbrl_LDADD =
 
 xbrl_SOURCES = src/getCIK.cpp\
 		src/sec_info.cpp \
-		Cxxurl/url.cpp \
+		CxxUrl/url.cpp \
 		src/main.cpp
