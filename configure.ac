@@ -15,8 +15,6 @@ AM_PROG_AR
 # Checks for libraries.
 LT_INIT
 
-PKG_CHECK_MODULES([XML],[libxml++])
-
 AX_BOOST_BASE([])
 
 # Checks for header files.
