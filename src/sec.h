@@ -38,7 +38,7 @@ public:
 	connection(std::string stock_name);
 	connection(Url u);
 	std::string getFact(std::string key)
-		{pt.get<std::string>(key);};
+	{pt.get<std::string>(key);};
 }
 
 
@@ -46,7 +46,7 @@ class report:public connection {
 private:
 	
 public:
-	report(Url u):connection(u);
+	report(Url u):connection(u){};
 }
 class sec {
 private:
@@ -58,11 +58,11 @@ public:
 	std::string SIC;
 	std::string SIC_desc;
 	std::string company_name;
-	info(string stock_symbol):symbol(stock_symbol),xbrl(stock_symbol) {
+	info(std::string stock_symbol):symbol(stock_symbol),data(stock_symbol) {
 		CIK=data.getFact("companyFilings.companyInfo.CIK");
 		SIC=data.getFact("companyFilings.companyInfo.SIC");
 		}; 	// Constructor
 } // class sec
 } // namespace sec
-#end //!_SEC_H
+#endif //!_SEC_H
 
