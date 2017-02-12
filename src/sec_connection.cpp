@@ -39,7 +39,7 @@ sec::connection::connection(std::string stock_symbol)
 	s.connect(host,"http");
 	if (!s)
 	{
-		std::cout << "Unable to connect: " s.error().message() << "\n";
+		std::cout << "Unable to connect: " << s.error().message() << "\n";
 		//return 1;
 	}
 	std::cout << "The sec class connect and it is now preparing to send a request\n";
@@ -78,7 +78,7 @@ sec::connection::connection(std::string stock_symbol)
 		std::cout<<header <<"\n";
 		
 	// The remaining data is the content.
-	boost::property_tree::read_xml(s, pt);
+	boost::property_tree::xml_parser::read_xml(s, pt);
 	
 }
 
@@ -140,7 +140,7 @@ sec::connection::connection(Url u)
 		std::cout<<header <<"\n";
 		
 	// The remaining data is the content.
-	boost::property_tree::read_xml(s, pt);
+	boost::property_tree::xml_parser::read_xml(s, pt);
 	
 	
 }
