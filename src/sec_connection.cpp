@@ -17,8 +17,8 @@
 
 #include <string>
 #include <iostream>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/asio.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/asio.hpp"
 #include "sec.h"
 
 sec::connection(std::string stock_symbol)
@@ -57,7 +57,7 @@ sec::connection(std::string stock_symbol)
 		Check that the response is OK */
 	std::string http_version;
 	s >> http_version;
-	unsigned int status code;
+	unsigned int status_code;
 	s >> status_code;
 	std::string status_message;
 	std::getline(s, status_message);
