@@ -33,14 +33,14 @@ sec::connection(std::string stock_symbol)
 	/*	The endire sequence of I/O operation must complete within 60 seconds
 		Ifi an expiry occurs, the socket is automatically closed and the
 		stream becomes bad */
-	s.expires_from_now(boost::posix::time::seconds(60);
+	s.expires_from_now(boost::posix::time::seconds(60));
 	
 	//	Establish a connection to the server
 	s.connect(host,"http");
 	if (!s)
 	{
 		std::cout << "Unable to connect: " s.error().message() << "\n";
-		return 1;
+		//return 1;
 	}
 	std::cout << "The sec class connect and it is now preparing to send a request\n";
 	/* 	Send the request. we specigy the "Connection: close" header so that the
@@ -64,12 +64,12 @@ sec::connection(std::string stock_symbol)
 	if (!s || http_version.substr(0,5) != "HTTP/")
 	{
 		std::cout << "Invalid response\n";
-		return 1;
+		//return 1;
 	} 
 	if (status_code !=200)
 	{
 		std::cout << "response returned with status code "<< status_code << "\n";
-		return 1;
+		//return 1;
 	}
 	
 	//	Process the response headers which are terminated by a blank line
@@ -89,20 +89,20 @@ sec::connection(Url u)
 	std::string host;
 	host = u.host();
 	std::string path;
-	path=sec::urlPathQuery(u);
+	path = urlPathQuery(u);
 	boost::asio::io_service io_service;
 	
 	/*	The endire sequence of I/O operation must complete within 60 seconds
 		Ifi an expiry occurs, the socket is automatically closed and the
 		stream becomes bad */
-	s.expires_from_now(boost::posix::time::seconds(60);
+	s.expires_from_now(boost::posix::time::seconds(60));
 	
 	//	Establish a connection to the server
 	s.connect(host,"http");
 	if (!s)
 	{
-		std::cout << "Unable to connect: " s.error().message() << "\n";
-		return 1;
+		std::cout << "Unable to connect: " << s.error().message() << "\n";
+		//return 1;
 	}
 	std::cout << "The sec class connect and it is now preparing to send a request\n";
 	/* 	Send the request. we specigy the "Connection: close" header so that the
@@ -119,19 +119,19 @@ sec::connection(Url u)
 		Check that the response is OK */
 	std::string http_version;
 	s >> http_version;
-	unsigned int status code;
+	unsigned int status_code;
 	s >> status_code;
 	std::string status_message;
 	std::getline(s, status_message);
 	if (!s || http_version.substr(0,5) != "HTTP/")
 	{
 		std::cout << "Invalid response\n";
-		return 1;
+		//return 1;
 	} 
 	if (status_code !=200)
 	{
 		std::cout << "response returned with status code "<< status_code << "\n";
-		return 1;
+		//return 1;
 	}
 	
 	//	Process the response headers which are terminated by a blank line
