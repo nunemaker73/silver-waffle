@@ -5,7 +5,7 @@ AM_CPPFLAGS = $(BOOST_CPPFLAGS)
 AM_LDFLAGS=$(BOOST_LDFLAGS)
 
 lib_LIBRARIES = libsecxx.a
-libsecxx_a_LDADD=
+
 libsecxx_a_SOURCES = src/getCIK.cpp \
 	src/sec_info.cpp \
 	src/url.cpp
@@ -17,7 +17,7 @@ nobase_include_HEADERS = src/sec_info.h \
 	src/xbrl.h
 
 bin_PROGRAMS = 	xbrl
-xbrl_LDADD = 
+
 
 xbrl_SOURCES = src/getCIK.cpp\
 		src/sec_info.cpp \
