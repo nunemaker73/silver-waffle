@@ -18,7 +18,7 @@
 #include <string>
 #include <iostream>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/asio.h>
+#include <boost/asio.hpp>
 #include "sec.h"
 
 sec::connection(std::string stock_symbol)
