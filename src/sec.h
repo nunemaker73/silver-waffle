@@ -42,7 +42,7 @@ public:
 }
 
 
-class report:public connection {
+class report: private connection {
 private:
 	
 public:
