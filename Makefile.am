@@ -4,11 +4,11 @@ AUTOMAKE_OPTIONS = subdir-objects
 AM_CPPFLAGS = $(BOOST_CPPFLAGS)
 AM_LDFLAGS=$(BOOST_LDFLAGS)
 
-lib_LIBRARIES = libsec++.a
-libsec++_a_LDADD=
-libsec++_a_SOURCES = src/getCIK.cpp \
+lib_LIBRARIES = libsecxx.a
+libsecxx_a_LDADD=
+libsecxx_a_SOURCES = src/getCIK.cpp \
 	src/sec_info.cpp \
-	CxxUrl/url.cpp
+	src/url.cpp
  
 pkgconfigdir = /usr/lib/pkgconfig
 pkgconfig_DATA = sec.pc
@@ -21,5 +21,7 @@ xbrl_LDADD =
 
 xbrl_SOURCES = src/getCIK.cpp\
 		src/sec_info.cpp \
-		CxxUrl/url.cpp \
+		src/url.cpp \
+		src/sec_connection.cpp\
+		src/url_helper.cpp\
 		src/main.cpp

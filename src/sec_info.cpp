@@ -18,13 +18,10 @@
 #include <string>
 #include "sec.h"
 
-sec::info::info(std::string stock_symbol)
-{
-	symbol = stock_symbol;
-	if (getCik() != 0){};
-}
 
 sec::info::verify()
 {
-    std::cout<<
+    std::cout<< "SIC:"<<SIC<<"\n";
+    
 }
+

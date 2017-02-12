@@ -24,36 +24,44 @@
 
 #include <string>
 #include <boost/property_tree/ptree.hpp>
-#include "../CxxUrl/url.hpp"
+#include "url.hpp"
 
 namespace sec{
 
-class xbrl {
-private:
-	Url xbrlUrl;
-	boost::gregrorian::date dateFiled;
-	std::string formType;
-public:
-	
-}
+std::string urlPathQuery(Url u);
 
-class info {
+//connection class will connect and get stream ready for content parse
+class connection{
 private:
 	boost::property_tree::ptree pt;
-	/* 	getCIK does more than just load the CIK.
-		It looks up SEC filing information and can 
-		preload a property tree. It will go ahead and
-		pull SIC */
-	int getCIK(); // called after stock symbol is set
-	std::vector<xbrl> xbrls;
+public:
+	connection(std::string stock_name);
+	connection(Url u);
+	std::string getFact(std::string key)
+		{pt.get<std::string>(key);};
+}
+
+
+class report:public connection {
+private:
+	
+public:
+	report(Url u):connection(u);
+}
+class sec {
+private:
+	connection data;
+	std::vector<report> reports;
 public:
 	std::string symbol;
 	std::string CIK;
 	std::string SIC;
 	std::string SIC_desc;
 	std::string company_name;
-	info(string stock_symbol); 	// Constructor
-	verify();
+	info(string stock_symbol):symbol(stock_symbol),xbrl(stock_symbol) {
+		CIK=data.getFact("companyFilings.companyInfo.CIK");
+		SIC=data.getFact("companyFilings.companyInfo.SIC");
+		}; 	// Constructor
 } // class sec
 } // namespace sec
 #end //!_SEC_H

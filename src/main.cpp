@@ -11,6 +11,6 @@ int main (int argc, char *argv[])
 		std::cout << argv[1]<<"\n";
 		std::cout << "calling the sec-info class now\n";
 	  	sec::info s(argv[1]);
-		s.verify();
+		std::cout 
 	}
 }
