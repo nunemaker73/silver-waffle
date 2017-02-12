@@ -6,21 +6,17 @@ AM_LDFLAGS=$(BOOST_LDFLAGS)
 
 lib_LIBRARIES = libsecxx.a
 
-libsecxx_a_SOURCES = src/getCIK.cpp \
-	src/sec_info.cpp \
+libsecxx_a_SOURCES = src/sec_connection.cpp
 	src/url.cpp
  
 pkgconfigdir = /usr/lib/pkgconfig
 pkgconfig_DATA = sec.pc
 
-nobase_include_HEADERS = src/sec_info.h \
-	src/xbrl.h
+nobase_include_HEADERS = src/sec.h
 
 bin_PROGRAMS = 	xbrl
 
-
-xbrl_SOURCES = src/sec_info.cpp \
-		src/url.cpp \
+xbrl_SOURCES = src/url.cpp \
 		src/sec_connection.cpp\
 		src/url_helper.cpp\
 		src/main.cpp
