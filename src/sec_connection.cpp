@@ -33,7 +33,7 @@ sec::connection::connection(std::string stock_symbol)
 	/*	The endire sequence of I/O operation must complete within 60 seconds
 		Ifi an expiry occurs, the socket is automatically closed and the
 		stream becomes bad */
-	s.expires_from_now(boost::posix::time::seconds(60));
+	s.expires_from_now(boost::posix_time::seconds(60));
 	
 	//	Establish a connection to the server
 	s.connect(host,"http");
@@ -95,7 +95,7 @@ sec::connection::connection(Url u)
 	/*	The endire sequence of I/O operation must complete within 60 seconds
 		Ifi an expiry occurs, the socket is automatically closed and the
 		stream becomes bad */
-	s.expires_from_now(boost::posix::time::seconds(60));
+	s.expires_from_now(boost::posix_time::seconds(60));
 	
 	//	Establish a connection to the server
 	s.connect(host,"http");

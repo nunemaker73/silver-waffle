@@ -44,7 +44,8 @@ public:
 class report: private connection {
 public:
 	report(Url u):connection(u){};
-}
+};
+
 class sec {
 private:
 	connection data;
@@ -55,7 +56,7 @@ public:
 	std::string SIC;
 	std::string SIC_desc;
 	std::string company_name;
-	info(std::string stock_symbol) :  symbol(stock_symbol),data(stock_symbol) {
+	sec(std::string stock_symbol) :  symbol(stock_symbol),data(stock_symbol) {
 		CIK=data.getFact("companyFilings.companyInfo.CIK");
 		SIC=data.getFact("companyFilings.companyInfo.SIC");
 		}; 	// Constructor
