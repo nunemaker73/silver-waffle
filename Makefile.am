@@ -19,8 +19,7 @@ nobase_include_HEADERS = src/sec_info.h \
 bin_PROGRAMS = 	xbrl
 
 
-xbrl_SOURCES = src/getCIK.cpp\
-		src/sec_info.cpp \
+xbrl_SOURCES = src/sec_info.cpp \
 		src/url.cpp \
 		src/sec_connection.cpp\
 		src/url_helper.cpp\
