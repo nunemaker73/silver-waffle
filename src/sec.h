@@ -38,7 +38,7 @@ public:
 	connection(std::string stock_name);
 	connection(Url u);
 	std::string getFact(std::string key){pt.get<std::string>(key);};
-}
+};
 
 
 class report: private connection {
@@ -59,7 +59,7 @@ public:
 		CIK=data.getFact("companyFilings.companyInfo.CIK");
 		SIC=data.getFact("companyFilings.companyInfo.SIC");
 		}; 	// Constructor
-} // class sec
+}; // class sec
 } // namespace sec
 #endif //!_SEC_H
 
