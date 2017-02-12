@@ -21,7 +21,7 @@
 #include "boost/asio.hpp"
 #include "sec.h"
 
-sec::connection(std::string stock_symbol)
+sec::connection::connection(std::string stock_symbol)
 {
 	boost::asio::ip::tcp::iostream s;
 	
@@ -82,7 +82,7 @@ sec::connection(std::string stock_symbol)
 	
 }
 
-sec::connection(Url u)
+sec::connection::connection(Url u)
 {
 	boost::asio::ip::tcp::iostream s;
 	
