@@ -26,14 +26,20 @@ sec::connection::connection(std::string stock_symbol)
 {
 	boost::asio::ip::tcp::iostream s;
 	
-	std::string s("www.sec.gov");
-	s += "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+	std::string urlstring("www.sec.gov");
+	s =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
-	u=s;
-	connection(u);	
+	u=urlstring;
+	connect(u);	
 }
 
 sec::connection::connection(Url u)
+{
+	connect(u);
+	
+}
+
+sec::connection::connect(Url u)
 {
 	boost::asio::ip::tcp::iostream s;
 	
@@ -92,6 +98,5 @@ sec::connection::connection(Url u)
 		
 	// The remaining data is the content.
 	boost::property_tree::xml_parser::read_xml(s, pt);
-	
 	
 }
