@@ -34,7 +34,7 @@ std::string urlPathQuery(Url u);
 class connection{
 private:
 	boost::property_tree::ptree pt;
-	connect(Url u);
+	int connect(Url u);
 public:
 	connection(std::string stock_name);
 	connection(Url u);

@@ -30,16 +30,16 @@ sec::connection::connection(std::string stock_symbol)
 	s =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
-	connect(u);	
+	if (connect(u)){};	
 }
 
 sec::connection::connection(Url u)
 {
-	connect(u);
+	if (connect(u)) {};
 	
 }
 
-sec::connection::connect(Url u)
+int sec::connection::connect(Url u)
 {
 	boost::asio::ip::tcp::iostream s;
 	
@@ -59,7 +59,7 @@ sec::connection::connect(Url u)
 	if (!s)
 	{
 		std::cout << "Unable to connect: " << s.error().message() << "\n";
-		//return 1;
+		return 1;
 	}
 	std::cout << "The sec class connect and it is now preparing to send a request\n";
 	/* 	Send the request. we specigy the "Connection: close" header so that the
@@ -83,12 +83,12 @@ sec::connection::connect(Url u)
 	if (!s || http_version.substr(0,5) != "HTTP/")
 	{
 		std::cout << "Invalid response\n";
-		//return 1;
+		return 1;
 	} 
 	if (status_code !=200)
 	{
 		std::cout << "response returned with status code "<< status_code << "\n";
-		//return 1;
+		return 1;
 	}
 	
 	//	Process the response headers which are terminated by a blank line
@@ -98,5 +98,6 @@ sec::connection::connect(Url u)
 		
 	// The remaining data is the content.
 	boost::property_tree::xml_parser::read_xml(s, pt);
+	return 0;
 	
 }
