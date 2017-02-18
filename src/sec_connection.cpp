@@ -27,7 +27,7 @@ sec::connection::connection(std::string stock_symbol)
 	boost::asio::ip::tcp::iostream s;
 	
 	std::string urlstring("www.sec.gov");
-	s =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+	urlstring =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
 	if (connect(u)){};	
