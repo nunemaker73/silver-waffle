@@ -12,7 +12,7 @@ std::string urlPathQuery(Url u)
 	{
 		s1+=q.key();
 		s1+="=";
-		s1+=q.value();
+		s1+=q.val();
 		s1+="&";
 	}
 	return s1;
