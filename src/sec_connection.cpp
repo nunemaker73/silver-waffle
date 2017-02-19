@@ -25,7 +25,7 @@
 sec::connection::connection(std::string stock_symbol)
 {
 	std::string urlstring("www.sec.gov");
-	urlstring =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+	urlstring = "http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
 	std::cout << "connectin url: " << u << "/n";
