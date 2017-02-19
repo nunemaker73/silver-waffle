@@ -8,7 +8,7 @@ lib_LIBRARIES = libsecxx.a
 
 libsecxx_a_SOURCES = src/sec_connection.cpp
 	src/url.cpp
-libsecxx_a_LDADD = $(BOOST_DATE_TIME_LIB) $(BOOST_SYSTEM_LIB) $(PTHREAD_CFLAGS)
+libsecxx_a_LIBADD = $(BOOST_DATE_TIME_LIB) $(BOOST_SYSTEM_LIB) $(PTHREAD_CFLAGS)
  
 pkgconfigdir = /usr/lib/pkgconfig
 pkgconfig_DATA = sec.pc
