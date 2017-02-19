@@ -89,7 +89,11 @@ int sec::connection::connect(Url u)
 	if (status_code !=200)
 	{
 		std::cout << "response returned with status code "<< status_code << "\n";
-		std::cout << s;
+		if (status_code == 301)
+		{
+			std::string loc;
+			s >> loc;
+			std::cout << loc <<"\n";
 		return 1;
 	}
 	
