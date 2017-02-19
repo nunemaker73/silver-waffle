@@ -28,7 +28,7 @@ sec::connection::connection(std::string stock_symbol)
 	urlstring = "http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
-	std::cout << "connectin url: " << u << "/n";
+	std::cout << "connectin url: " << u << "\n";
 	if (connect(u)){};	
 }
 
@@ -46,8 +46,8 @@ int sec::connection::connect(Url u)
 	host = u.host();
 	std::string path;
 	path = urlPathQuery(u);
-	std::cout << "host:" << host << "/n";
-	std::cout << "path:" << path << "/n";
+	std::cout << "host:" << host << "\n";
+	std::cout << "path:" << path << "\n";
 	boost::asio::io_service io_service;
 	
 	/*	The endire sequence of I/O operation must complete within 60 seconds
@@ -89,6 +89,7 @@ int sec::connection::connect(Url u)
 	if (status_code !=200)
 	{
 		std::cout << "response returned with status code "<< status_code << "\n";
+		std::cout << s;
 		return 1;
 	}
 	
