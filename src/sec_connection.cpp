@@ -94,6 +94,7 @@ int sec::connection::connect(Url u)
 			std::string loc;
 			s >> loc;
 			std::cout << loc <<"\n";
+		}
 		return 1;
 	}
 	
