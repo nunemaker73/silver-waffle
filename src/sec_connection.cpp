@@ -28,6 +28,7 @@ sec::connection::connection(std::string stock_symbol)
 	urlstring =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
+	std::cout << "connectin url: " << u << "/n";
 	if (connect(u)){};	
 }
 
