@@ -23,15 +23,13 @@
 */
 
 #include <string>
+#include "connection.h"
 #include "url.hpp"
 
 namespace sec{
 
-
-
-
-
-class report: private connection {
+class report: public connection
+{
 public:
 	report(Url u):connection(u){};
 };
