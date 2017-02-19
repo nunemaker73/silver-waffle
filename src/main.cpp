@@ -10,7 +10,7 @@ int main (int argc, char *argv[])
 		std::cout << "Preparing to pull from internet still in main.cpp\n";
 		std::cout << argv[1]<<"\n";
 		std::cout << "calling the sec-info class now\n";
-	  	sec::info s(argv[1]);
+	  	sec::sec s(argv[1]);
 		
 	}
 }
