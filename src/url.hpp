@@ -32,6 +32,7 @@ SOFTWARE.
 #include <ostream>
 #include <utility>
 
+std::string urlPathQuery(Url u);
 
 class Url {
 public:

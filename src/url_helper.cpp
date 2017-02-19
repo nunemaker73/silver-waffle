@@ -1,8 +1,7 @@
 #include <string>
 #include "url.hpp"
-#include "sec.h"
 
-std::string sec::urlPathQuery(Url u)
+std::string urlPathQuery(Url u)
 {
 	std::string s1;
 	s1 = u.path();

@@ -27,7 +27,6 @@
 
 namespace sec{
 
-std::string urlPathQuery(Url u);
 
 
 
