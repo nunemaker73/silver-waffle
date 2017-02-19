@@ -32,7 +32,6 @@ SOFTWARE.
 #include <ostream>
 #include <utility>
 
-std::string urlPathQuery(Url u);
 
 class Url {
 public:
@@ -226,6 +225,7 @@ private:
     mutable std::int8_t m_ip_v;
 };
 
+std::string urlPathQuery(Url u);
 
 
 
