@@ -7,7 +7,7 @@ std::string urlPathQuery(Url u)
 	s1 = u.path();
 	Url::Query q1;
 	q1=u.query();
-	if (q1.size()<0) {s1+="?";};
+	if (q1.size()<0) {s1 = s1+'?';};
 	for (const auto& q:q1)
 	{
 		s1+=q.key();
