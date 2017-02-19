@@ -1,5 +1,6 @@
 #ifndef SEC_CONNECTION_H
 #define SEC_CONNECTION_H
+#include "url.hpp"
 namespace sec {
 //connection class will connect and get stream ready for content parse
 class connection{
