@@ -44,7 +44,7 @@ int sec::connection::connect(Url u)
 	std::string host;
 	host = u.host();
 	std::string path;
-	path = urlPathQuery(u);
+	path = sec::urlPathQuery(u);
 	boost::asio::io_service io_service;
 	
 	/*	The endire sequence of I/O operation must complete within 60 seconds
