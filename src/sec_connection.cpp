@@ -20,12 +20,10 @@
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/property_tree/xml_parser.hpp"
 #include "boost/asio.hpp"
-#include "sec.h"
+#include "connection.h"
 
 sec::connection::connection(std::string stock_symbol)
 {
-	boost::asio::ip::tcp::iostream s;
-	
 	std::string urlstring("www.sec.gov");
 	urlstring =+ "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
