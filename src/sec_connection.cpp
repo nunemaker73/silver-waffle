@@ -81,6 +81,7 @@ int sec::connection::connect(Url u)
 	s >> status_code;
 	std::string status_message;
 	std::getline(s, status_message);
+	std::cout << "http_version: " << http_version << "\n";
 	if (!s || http_version.substr(0,5) != "HTTP/")
 	{
 		std::cout << "Invalid response\n";
