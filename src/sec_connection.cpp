@@ -25,10 +25,10 @@
 sec::connection::connection(std::string stock_symbol)
 {
 	std::string urlstring("www.sec.gov");
-	urlstring = "http://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+	urlstring = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
 	Url u;
 	u=urlstring;
-	std::cout << "connectin url: " << u << "\n";
+	std::cout << "connection url: " << u << "\n";
 	if (connect(u)){};	
 }
 
@@ -56,7 +56,7 @@ int sec::connection::connect(Url u)
 	s.expires_from_now(boost::posix_time::seconds(60));
 	
 	//	Establish a connection to the server
-	s.connect(host,"http");
+	s.connect(host,"https");
 	if (!s)
 	{
 		std::cout << "Unable to connect: " << s.error().message() << "\n";
@@ -66,7 +66,7 @@ int sec::connection::connect(Url u)
 	/* 	Send the request. we specigy the "Connection: close" header so that the
 		server will close the socket after transmittinigi the response. this will
 		allow us to treat all data up until the EOF as the content*/
-	s << "GET "		<< path 	<< " HTTP/1.0\r\n";
+	s << "GET "		<< path 	<< " HTTPS/1.0\r\n";
 	s << "Host: " 	<< host 	<< "\r\n";
 	s << "Connection: close \r\n\r\n";
 	
@@ -81,7 +81,7 @@ int sec::connection::connect(Url u)
 	s >> status_code;
 	std::string status_message;
 	std::getline(s, status_message);
-	if (!s || http_version.substr(0,5) != "HTTP/")
+	if (!s || http_version.substr(0,5) != "HTTPS/")
 	{
 		std::cout << "Invalid response\n";
 		return 1;
