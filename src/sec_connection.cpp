@@ -21,15 +21,23 @@
 #include "boost/property_tree/xml_parser.hpp"
 #include "boost/asio.hpp"
 #include "connection.h"
+#include "client.hpp"
+
+
 
 sec::connection::connection(std::string stock_symbol)
 {
-	std::string urlstring("www.sec.gov");
-	urlstring = "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
-	Url u;
-	u=urlstring;
-	std::cout << "connection url: " << u << "\n";
-	if (connect(u)){};	
+	std::string urlstring;
+	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+    boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
+    ctx.set_default_verify_paths();
+
+    boost::asio::io_service io_service;
+    client c(io_service, ctx, "www.sec.gov", urlstring);
+    io_service.run();
+	std::string s;
+	s=c.getContent();
+	boost::property_tree::xml_parser::read_xml(s, pt);
 }
 
 sec::connection::connection(Url u)
@@ -40,6 +48,7 @@ sec::connection::connection(Url u)
 
 int sec::connection::connect(Url u)
 {
+/*
 	boost::asio::ip::tcp::iostream s;
 	
 	std::string host;
@@ -53,7 +62,7 @@ int sec::connection::connect(Url u)
 	/*	The endire sequence of I/O operation must complete within 60 seconds
 		Ifi an expiry occurs, the socket is automatically closed and the
 		stream becomes bad */
-	s.expires_from_now(boost::posix_time::seconds(60));
+	/*s.expires_from_now(boost::posix_time::seconds(60));
 	
 	//	Establish a connection to the server
 	s.connect(host,"https");
@@ -66,7 +75,7 @@ int sec::connection::connect(Url u)
 	/* 	Send the request. we specigy the "Connection: close" header so that the
 		server will close the socket after transmittinigi the response. this will
 		allow us to treat all data up until the EOF as the content*/
-	s << "GET "		<< path 	<< " HTTPS/1.0\r\n";
+	/*s << "GET "		<< path 	<< " HTTPS/1.0\r\n";
 	s << "Host: " 	<< host 	<< "\r\n";
 	s << "Connection: close \r\n\r\n";
 	
@@ -75,7 +84,7 @@ int sec::connection::connect(Url u)
 		not necessary not explicitly flush the stream at this point.
 		
 		Check that the response is OK */
-	std::string http_version;
+	/*std::string http_version;
 	s >> http_version;
 	unsigned int status_code;
 	s >> status_code;
@@ -107,5 +116,5 @@ int sec::connection::connect(Url u)
 	// The remaining data is the content.
 	boost::property_tree::xml_parser::read_xml(s, pt);
 	return 0;
-	
+	*/
 }
