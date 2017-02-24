@@ -15,9 +15,7 @@ class client
 public:
     client(boost::asio::io_service& io_service,
            boost::asio::ssl::context& context,
-           const std::string& server, const std::string& path)
-        : resolver_(io_service),
-          socket_(io_service, context);
+           const std::string& server, const std::string& path);
     std::string getContent();
 
 private:
