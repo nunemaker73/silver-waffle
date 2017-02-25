@@ -4,7 +4,8 @@
 
 int main (int argc, char *argv[])
 {
-using namespace std;
+using std::cout;
+using std::exception;
 try {
 	
 	if (argc != 2) throw basic_error("argument usage error");
@@ -13,7 +14,7 @@ try {
 }
 catch (exception& e)
 {
-	cout << e.what();	
+	cout << e.what()<<"\n";	
 }
 return 0;
 }
