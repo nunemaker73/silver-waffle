@@ -13,18 +13,24 @@ https_client::https_client(const std::string& server, const std::string& path)
 {
 	using namespace boost::asio;
 	std::string data;
-	
+	//setup context
 	ssl::context ctx(ssl::context::sslv23);
 	
+	//set up ioservice
 	std::shared_ptr<io_service> ioserv(new io_service);
 	io_service_p = ioserv;
 	
+	ip::tcp::resolver resolver(io_service);
+    ip::tcp::resolver::query query(server, "https");
+    ip::tcp::resolver::iterator endpoint_it = resolver.resolve(query);
+
+	
+	//setup ssl stream
 	std::shared_ptr<ssl_stream_t> streamp(new ssl_stream_t(*io_service_p,ctx));
 	socket_p =  streamp;
-	     
-	//	Establish a connection to the server
-	//socket_.connect(host,"https");
-	//if (!socket_) throw connection_error(socket_.error().message(})
+	
+	socket_p->lowest_layer().connect(endpoint_it);
+	
 	socket_p->handshake (ssl::stream<ip::tcp::socket>::client);
 
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
