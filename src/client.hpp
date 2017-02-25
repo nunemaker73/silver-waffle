@@ -15,7 +15,7 @@ class client
 public:
     client(const std::string& server, const std::string& path);
     std::string getContent(){return content_;};
-    unsigned int getStatus(){return status_code_;};
+    unsigned int getStatusCode(){return status_code_;};
     std::string getStatus(){return status_message_;};
     std::string getHeaders(){return headers_;};
     std::string getHttpVersion(){return http_version_;};

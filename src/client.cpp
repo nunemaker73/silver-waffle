@@ -18,11 +18,12 @@ client::client(const std::string& server, const std::string& path)
 	
 	std::string data;
 	
-	s.handshake(client);
 	
 	//	Establish a connection to the server
 	s.connect(host,"https");
 	if (!s) throw connection_error(s.error().message(});
+	
+	s.handshake(client);
 	
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
