@@ -40,13 +40,13 @@ https_client::https_client(const std::string& server, const std::string& path)
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
 	std::cout << "readword next:\n";
-	http_version_ = readWord();
-	std::cout << "readInt next\n";
-	status_code_ = readInt();
+	http_version_ = readLine();
+	//std::cout << "readInt next\n";
+	//status_code_ = readInt();
 	status_message_=readLine();
 	std::cout << "http_version: " << http_version_ << "\n";
-	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
-	if (status_code_ !=200) throw status_error(status_code_,readLine());
+//	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
+//	if (status_code_ !=200) throw status_error(status_code_,readLine());
 	headers_ = readHeaders();
 	content_ = readAll();
 }
