@@ -43,6 +43,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	http_version_ = readLine();
 	//std::cout << "readInt next\n";
 	//status_code_ = readInt();
+	std::cout << "message line next readLine 46\n";
 	status_message_=readLine();
 	std::cout << "http_version: " << http_version_ << "\n";
 //	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
@@ -54,7 +55,7 @@ std::string https_client::readLine()
 {
 	using namespace boost::asio;
 	streambuf b;
-	read_until(*socket_p,b,"\r\n");
+	read_until(*socket_p,b,"\n");
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
