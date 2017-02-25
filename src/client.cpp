@@ -14,15 +14,13 @@ https_client::https_client(const std::string& server, const std::string& path)
 	using namespace boost::asio;
 	std::string data;
 	
-	std::shared_ptr<ssl::context> ctxp;
-	ctxp = new ssl::context(ssl::context::sslv23);
-	ctx_p = ctxp;
+	ssl::context ctx(ssl::context::sslv23);
 	
 	std::shared_ptr<io_service> ioserv(new io_service);
 	io_service_p = ioserv;
 	
 	std::shared_ptr<ssl_stream_t> streamp;
-	streamp=new ssl_stream(*io_service,*ctx);
+	streamp=new ssl_stream_t(*io_service,ctx);
 	socket_p =  streamp;
 	     
 	//	Establish a connection to the server
