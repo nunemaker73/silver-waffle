@@ -39,6 +39,7 @@ public:
 private:
  //   tcp::resolver resolver_;
     boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
+    boost::asio::io_service io_service_;
     boost::asio::ssl::context ctx_;
     std::string http_version_;
     unsigned int status_code_;

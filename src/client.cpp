@@ -10,7 +10,7 @@
 
 client::client(const std::string& server, const std::string& path):
 ctx_(boost::asio::ssl::context::sslv23),
-socket_(io_service,ctx_)
+socket_(io_service_,ctx_)
 {
 	std::string data;
 	
