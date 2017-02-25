@@ -16,8 +16,8 @@ socket_(io_service_,ctx_)
 	
 	
 	//	Establish a connection to the server
-	socket_.connect(host,"https");
-	if (!socket_) throw connection_error(socket_.error().message(});
+	//socket_.connect(host,"https");
+	//if (!socket_) throw connection_error(socket_.error().message(});
 	
 	socket_.handshake(client);
 	
