@@ -20,12 +20,10 @@ public:
 	
 private:
  //   tcp::resolver resolver_;
- 	using boost::asio::ssl::stream;
- 	using boost::asio::ip::tcp::socket;
-    using boost::asio::io_service;
+ 	typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_stream_t;
     //using boost::asio::ssl:context;
-    std::shared_ptr<stream<socket>> socket_p;
-    std::shared_ptr<io_service> io_service_p;
+    std::shared_ptr<ssl_stream_t> socket_p;
+    std::shared_ptr<boost::asio::io_service> io_service_p;
     //std::shared_ptr<context> ctx_p;
     std::string http_version_;
     unsigned int status_code_;
