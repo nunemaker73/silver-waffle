@@ -12,7 +12,7 @@ struct connection_error: public std::exception {
 		const char * what () const throw() {
 			std::string temp("Unable to connect: ");
 			temp += message_;
-			return temp;}; };
+			return temp.data();}; };
 	struct status_error: public std::exception {
 		unsigned int code_
 		std::string message_;
@@ -22,7 +22,7 @@ struct connection_error: public std::exception {
 			temp += code_;
 			temp += "\n";
 			temp += message_;
-			return temp;}; };
+			return temp.data();}; };
 
 class client
 {
