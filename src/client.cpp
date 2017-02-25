@@ -27,15 +27,15 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::shared_ptr<ssl_stream_t> streamp(new ssl_stream_t(*io_service_p,ctx));
 	socket_p =  streamp;
 	
-	tcp::resolver resolver(*io_service);
-	tcp::resolver::query query(server, "https");
+	ip::tcp::resolver resolver(*io_service);
+	ip::tcp::resolver::query query(server, "https");
 	boost::asio::connect(socket_p->lowest_layer(), resolver.resolve(query));
-	socket_p->lowest_layer().set_option(tcp::no_delay(true));
+	socket_p->lowest_layer().set_option(ip::tcp::no_delay(true));
 	// Perform SSL handshake and verify the remote host's
 	// certificate.
 	socket_p->set_verify_mode(ssl::verify_peer);
 	socket_p->set_verify_callback(ssl::rfc2818_verification(server));
-	socket_p->handshake(ssl_socket::client);
+	socket_p->handshake(ssl_stream_t::client);
 // read and write as normal
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
