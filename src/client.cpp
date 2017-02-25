@@ -27,7 +27,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::shared_ptr<ssl_stream_t> streamp(new ssl_stream_t(*io_service_p,ctx));
 	socket_p =  streamp;
 	
-	ip::tcp::resolver resolver(*io_service);
+	ip::tcp::resolver resolver(*io_service_p);
 	ip::tcp::resolver::query query(server, "https");
 	boost::asio::connect(socket_p->lowest_layer(), resolver.resolve(query));
 	socket_p->lowest_layer().set_option(ip::tcp::no_delay(true));
