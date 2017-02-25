@@ -12,13 +12,14 @@ https_client::https_client(const std::string& server, const std::string& path):
 ctx_(boost::asio::ssl::context::sslv23),
 socket_(io_service_,ctx_)
 {
+	using namespace boost::asio;
 	std::string data;
 	
 	
 	//	Establish a connection to the server
 	//socket_.connect(host,"https");
 	//if (!socket_) throw connection_error(socket_.error().message(})
-	socket_.handshake (boost::asio::ssl::stream<boost::asio::ip::tcp::socket>::client);
+	socket_.handshake (ssl::stream<ip::tcp::socket>::client);
 
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
@@ -33,7 +34,7 @@ socket_(io_service_,ctx_)
 }
 std::string https_client::readLine()
 {
-	using boost::asio;
+	using namespace boost::asio;
 	streambuf b;
 	read_until(socket_,b,"\r\n");
 	std::istream is(&b);
@@ -44,7 +45,7 @@ std::string https_client::readLine()
 
 std::string https_client::readHeaders()
 {
-	using boost::asio;
+	using namespace boost::asio;
 	streambuf b;
 	read_until(socket_,b,"\r\n\r\n");
 	std::istream is(&b);
@@ -56,7 +57,7 @@ std::string https_client::readHeaders()
 
 std::string https_client::readWord()
 {
-	using boost::asio;
+	using namespace boost::asio;
 	streambuf b;
 	read_until(socket_,b,' ');
 	std::istream is(&b);
@@ -67,7 +68,7 @@ std::string https_client::readWord()
 
 unsigned int https_client::readInt()
 {
-	using boost::asio;
+	using namespace boost::asio;
 	streambuf b;
 	read_until(socket_,b,' ');
 	std::istream is(&b);
@@ -79,7 +80,7 @@ unsigned int https_client::readInt()
 
 std::string https_client::readAll()
 {
-	using boost::asio;
+	using namespace boost::asio;
 	streambuf b;
 	read(socket_, b);
 	std::istream is(&b);
