@@ -110,6 +110,6 @@ std::string https_client::readAll()
 	std::string data;
 	std::getline(is,data);
 	
-	std::cout << line << "\n";
+	std::cout << data<< "\n";
 	return data;
 }
