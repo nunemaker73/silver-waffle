@@ -1,5 +1,5 @@
 #include <iostream>
-#include <exception>
+#include "error.hpp"
 #include "sec.h"
 
 int main (int argc, char *argv[])
@@ -7,12 +7,13 @@ int main (int argc, char *argv[])
 using namespace std;
 try {
 	
-	if (argc != 2) throw "argument usage error";
+	if (argc != 2) throw basic_error("argument usage error");
 
-	sec::sec s(argv[0]);}
+	sec::sec s(argv[1]);
+}
 catch (exception& e)
 {
-cout << e.what();	
+	cout << e.what();	
 }
-
+return 0;
 }
