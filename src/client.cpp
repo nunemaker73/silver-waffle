@@ -56,6 +56,7 @@ std::string https_client::readLine()
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
+	std::cout << line << "\n";
 	return line;
 }
 
@@ -68,6 +69,8 @@ std::string https_client::readHeaders()
 	std::string data="";
 	for (std::string line; std::getline(is,line); ){
 		data+=line;}
+	
+	std::cout << data << "\n";
 	return data;
 }
 
@@ -79,6 +82,8 @@ std::string https_client::readWord()
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
+	
+	std::cout << line << "\n";
 	return line;
 }
 
@@ -90,6 +95,8 @@ unsigned int https_client::readInt()
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
+	
+	std::cout << line << "\n";
 	unsigned int ret = std::stoi(line);
 	return ret;
 }
@@ -102,5 +109,7 @@ std::string https_client::readAll()
 	std::istream is(&b);
 	std::string data;
 	std::getline(is,data);
+	
+	std::cout << line << "\n";
 	return data;
 }
