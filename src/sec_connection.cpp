@@ -27,7 +27,7 @@ sec::connection::connection(std::string stock_symbol)
 {
 	std::string urlstring;
 	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
-    client c("www.sec.gov", urlstring);
+    https_client c("www.sec.gov", urlstring);
     std::string s;
 	s=c.getContent();
 	boost::property_tree::xml_parser::read_xml(s, pt);
@@ -35,7 +35,7 @@ sec::connection::connection(std::string stock_symbol)
 
 sec::connection::connection(Url u)
 {
-	client c(u.host(),u.path_queries());
+	https_client c(u.host(),u.path_queries());
     std::string s;
 	s=c.getContent();
 	boost::property_tree::xml_parser::read_xml(s, pt);	

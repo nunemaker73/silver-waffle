@@ -25,7 +25,7 @@ struct status_error: public std::exception {
 		temp += message_;
 		return temp.data();}; };
 
-class client
+class https_client
 {
 public:
     client(const std::string& server, const std::string& path);

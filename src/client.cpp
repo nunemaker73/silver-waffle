@@ -8,7 +8,7 @@
 #include "client.hpp"
 
 
-client::client(const std::string& server, const std::string& path):
+https_client::https_client(const std::string& server, const std::string& path):
 ctx_(boost::asio::ssl::context::sslv23),
 socket_(io_service_,ctx_)
 {
@@ -32,7 +32,7 @@ socket_(io_service_,ctx_)
 	headers_ = readHeaders();
 	content_ = readAll()
 }
-std::string readLine()
+std::string https_client::readLine()
 {
 	using boost::asio;
 	streambuf b;
@@ -43,7 +43,7 @@ std::string readLine()
 	return line;
 }
 
-std::string readHeaders()
+std::string https_client::readHeaders()
 {
 	using boost::asio;
 	streambuf b;
@@ -55,7 +55,7 @@ std::string readHeaders()
 	return data;
 }
 
-std::string readWord()
+std::string https_client::readWord()
 {
 	using boost::asio;
 	streambuf b;
@@ -66,7 +66,7 @@ std::string readWord()
 	return line;
 }
 
-unsigned int readWord()
+unsigned int https_client::readInt()
 {
 	using boost::asio;
 	streambuf b;
@@ -78,7 +78,7 @@ unsigned int readWord()
 	return ret;
 }
 
-std::string readAll()
+std::string https_client::readAll()
 {
 	using boost::asio;
 	streambuf b;
