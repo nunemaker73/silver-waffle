@@ -6,20 +6,7 @@
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 
-
-using boost::asio::ip::tcp;
-
-
-class client
-{
-public:
-    client(const std::string& server, const std::string& path);
-    std::string getContent(){return content_;};
-    unsigned int getStatusCode(){return status_code_;};
-    std::string getStatus(){return status_message_;};
-    std::string getHeaders(){return headers_;};
-    std::string getHttpVersion(){return http_version_;};
-	struct connection_error: public exception {
+struct connection_error: public exception {
 		std::string message_;
 		connection_error(std::string message):message_(message){};
 		const char * what () const throw() {
@@ -35,7 +22,18 @@ public:
 			temp += code_;
 			temp += "\n";
 			temp += message_;
-			return temp;}; };	
+			return temp;}; };
+
+class client
+{
+public:
+    client(const std::string& server, const std::string& path);
+    std::string getContent(){return content_;};
+    unsigned int getStatusCode(){return status_code_;};
+    std::string getStatus(){return status_message_;};
+    std::string getHeaders(){return headers_;};
+    std::string getHttpVersion(){return http_version_;};
+		
 	
 private:
  //   tcp::resolver resolver_;

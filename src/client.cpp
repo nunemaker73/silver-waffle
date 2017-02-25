@@ -28,7 +28,7 @@ client::client(const std::string& server, const std::string& path)
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
 	http_version_ = readWord();
-	status_code_ = readWord();
+	status_code_ = readInt();
 	status_message_=readLine();
 	std::cout << "http_version: " << http_version_ << "\n";
 	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
