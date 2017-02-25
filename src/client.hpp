@@ -28,7 +28,7 @@ struct status_error: public std::exception {
 class https_client
 {
 public:
-    client(const std::string& server, const std::string& path);
+    https_client(const std::string& server, const std::string& path);
     std::string getContent(){return content_;};
     unsigned int getStatusCode(){return status_code_;};
     std::string getStatus(){return status_message_;};
