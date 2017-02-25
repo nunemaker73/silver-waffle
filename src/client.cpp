@@ -29,7 +29,7 @@ socket_(io_service_,ctx_)
 	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
 	if (status_code_ !=200) throw status_error(status_code_,readLine());
 	headers_ = readHeaders();
-	content_ = readAll()
+	content_ = readAll();
 }
 std::string https_client::readLine()
 {
