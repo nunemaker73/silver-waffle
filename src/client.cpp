@@ -93,7 +93,7 @@ unsigned int https_client::readInt()
 {
 	using namespace boost::asio;
 	streambuf b;
-	read_until(*socket_p,b," ");
+	read_until(*socket_p,b,"\r\n");
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
