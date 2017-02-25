@@ -14,7 +14,7 @@ struct connection_error: public std::exception {
 			temp += message_;
 			return temp.data();}; };
 	struct status_error: public std::exception {
-		unsigned int code_
+		unsigned int code_;
 		std::string message_;
 		status_error(unsigned int code, std::string message):code_(code),message_(message){};
 		const char * what () const throw() {
