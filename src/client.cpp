@@ -22,7 +22,8 @@ https_client::https_client(const std::string& server, const std::string& path)
 	
 	ip::tcp::resolver resolver(io_service);
     ip::tcp::resolver::query query(server, "https");
-    ip::tcp::resolver::iterator endpoint_it = resolver.resolve(query);
+    ip::tcp::resolver::iterator endpoint_it;
+    endpoint_it = resolver.resolve(query);
 
 	
 	//setup ssl stream
