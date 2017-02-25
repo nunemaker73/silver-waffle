@@ -8,14 +8,10 @@
 #include "client.hpp"
 
 
-client::client(const std::string& server, const std::string& path)
+client::client(const std::string& server, const std::string& path):
+ctx_(boost::asio::ssl::context::sslv23),
+socket_(io_service,ctx_)
 {
-
-    
-    boost::asio::io_service io_service;
-	boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
-	boost::asio::ssl::stream<asio:ip::tcp::socket> s(io_service, ctx);
-	
 	std::string data;
 	
 	
@@ -51,7 +47,7 @@ std::string readHeaders()
 {
 	using boost::asio;
 	streambuf b;
-	read_until(s,b,"\r\n\r\n");
+	read_until(socket_,b,"\r\n\r\n");
 	std::istream is(&b);
 	std::string data="";
 	for (std::string line; std::getline(is,line) ){
@@ -63,7 +59,7 @@ std::string readWord()
 {
 	using boost::asio;
 	streambuf b;
-	read_until(s,b,' ');
+	read_until(socket_,b,' ');
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
@@ -74,7 +70,7 @@ unsigned int readWord()
 {
 	using boost::asio;
 	streambuf b;
-	read_until(s,b,' ');
+	read_until(socket_,b,' ');
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
@@ -86,37 +82,9 @@ std::string readAll()
 {
 	using boost::asio;
 	streambuf b;
-	read(s, b);
+	read(socket_, b);
 	std::istream is(&b);
 	std::string data;
 	std::getline(is,data);
 	return data;
 }
-
-/*
-int main(int argc, char* argv[])
-{
-    try
-    {
-        if (argc != 3)
-        {
-            std::cout << "Usage: https_client <server> <path>\n";
-
-            return 1;
-        }
-
-        boost::asio::ssl::context ctx(boost::asio::ssl::context::sslv23);
-        ctx.set_default_verify_paths();
-
-        boost::asio::io_service io_service;
-        client c(io_service, ctx, argv[1], argv[2]);
-        io_service.run();
-    }
-    catch (std::exception& e)
-    {
-        std::cout << "Exception: " << e.what() << "\n";
-    }
-
-    return 0;
-}
-*/

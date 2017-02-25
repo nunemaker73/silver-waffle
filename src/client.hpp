@@ -13,16 +13,17 @@ struct connection_error: public std::exception {
 			std::string temp("Unable to connect: ");
 			temp += message_;
 			return temp.data();}; };
-	struct status_error: public std::exception {
-		unsigned int code_;
-		std::string message_;
-		status_error(unsigned int code, std::string message):code_(code),message_(message){};
-		const char * what () const throw() {
-			std::string temp("Invalid status code: ");
-			temp += code_;
-			temp += "\n";
-			temp += message_;
-			return temp.data();}; };
+
+struct status_error: public std::exception {
+	unsigned int code_;
+	std::string message_;
+	status_error(unsigned int code, std::string message):code_(code),message_(message){};
+	const char * what () const throw() {
+		std::string temp("Invalid status code: ");
+		temp += code_;
+		temp += "\n";
+		temp += message_;
+		return temp.data();}; };
 
 class client
 {
@@ -37,7 +38,8 @@ public:
 	
 private:
  //   tcp::resolver resolver_;
-    boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
+    boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_
+    boost::asio::ssl::context ctx_;
     std::string http_version_;
     unsigned int status_code_;
     std::string status_message_;
@@ -48,7 +50,7 @@ private:
     unsigned int readInt();
     std::string readHeaders();
     std::string readAll();
-    void write(std::string data){boost::asio::write(s,boost::asio::buffer(data));};
+    void write(std::string data){boost::asio::write(socket_,boost::asio::buffer(data));};
 };
 
 #endif
