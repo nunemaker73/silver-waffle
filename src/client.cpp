@@ -39,7 +39,9 @@ https_client::https_client(const std::string& server, const std::string& path)
 // read and write as normal
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
+	std::cout << "readword next:\n";
 	http_version_ = readWord();
+	std::cout << "readInt next\n";
 	status_code_ = readInt();
 	status_message_=readLine();
 	std::cout << "http_version: " << http_version_ << "\n";
@@ -78,12 +80,12 @@ std::string https_client::readWord()
 {
 	using namespace boost::asio;
 	streambuf b;
-	read_until(*socket_p,b,' ');
+	read_until(*socket_p,b," ");
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
 	
-	std::cout << line << "\n";
+	std::cout << line << "\treadWord\n";
 	return line;
 }
 
@@ -91,12 +93,12 @@ unsigned int https_client::readInt()
 {
 	using namespace boost::asio;
 	streambuf b;
-	read_until(*socket_p,b,' ');
+	read_until(*socket_p,b," ");
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
 	
-	std::cout << line << "\n";
+	std::cout << line << "\readInt\n";
 	unsigned int ret = std::stoi(line);
 	return ret;
 }
