@@ -48,7 +48,7 @@ private:
     unsigned int readInt();
     std::string readHeaders();
     std::string readAll();
-    writeData(std::string data){boost::asio::write(s,boost::asio::buffer(data));};
+    void writeData(std::string data){boost::asio::write(s,boost::asio::buffer(data));};
 };
 
 #endif
