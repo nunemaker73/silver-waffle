@@ -50,7 +50,7 @@ std::string https_client::readHeaders()
 	read_until(socket_,b,"\r\n\r\n");
 	std::istream is(&b);
 	std::string data="";
-	for (std::string line; std::getline(is,line) ){
+	for (std::string line; std::getline(is,line); ){
 		data+=line;}
 	return data;
 }
