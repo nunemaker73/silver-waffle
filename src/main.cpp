@@ -9,7 +9,6 @@ try {
 	
 	if (argc != 2) throw "argument usage error";
 	sec::sec s(argv[1]);}
-}
 catch (exception& e)
 {
 std::cout << e.what();	
