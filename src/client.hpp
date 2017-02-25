@@ -6,14 +6,14 @@
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 
-struct connection_error: public exception {
+struct connection_error: public std::exception {
 		std::string message_;
 		connection_error(std::string message):message_(message){};
 		const char * what () const throw() {
 			std::string temp("Unable to connect: ");
 			temp += message_;
 			return temp;}; };
-	struct status_error: public exception {
+	struct status_error: public std::exception {
 		unsigned int code_
 		std::string message_;
 		status_error(unsigned int code, std::string message):code_(code),message_(message){};

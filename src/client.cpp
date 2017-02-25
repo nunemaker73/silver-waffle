@@ -6,7 +6,7 @@
 #include <boost/bind.hpp>
 #include <boost/asio/ssl.hpp>
 #include "client.hpp"
-using boost::asio::ip::tcp;
+
 
 client::client(const std::string& server, const std::string& path)
 {
