@@ -19,8 +19,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::shared_ptr<io_service> ioserv(new io_service);
 	io_service_p = ioserv;
 	
-	std::shared_ptr<ssl_stream_t> streamp;
-	streamp=new ssl_stream_t(*io_service_p,ctx);
+	std::shared_ptr<ssl_stream_t> streamp(new ssl_stream_t(io_service_p*,ctx));
 	socket_p =  streamp;
 	     
 	//	Establish a connection to the server
