@@ -11,7 +11,7 @@ try {
 	sec::sec s(argv[1]);}
 catch (exception& e)
 {
-std::cout << e.what();	
+//cout << e.what();	
 }
 
 }
