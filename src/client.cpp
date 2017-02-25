@@ -37,6 +37,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	socket_p->set_verify_callback(ssl::rfc2818_verification(server));
 	socket_p->handshake(ssl_stream_t::client);
 // read and write as normal
+	std::cout << "path: "<<path << "\n";
 	data =  "GET "+ path +" HTTP/1.0\r\nConnection: close\r\n\r\n";
 	write(data);
 	std::cout << "readword next:\n";
