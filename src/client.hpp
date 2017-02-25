@@ -2,28 +2,10 @@
 #define CLIENT_HPP
 
 #include <string>
-#include <exception>
+#include <memory> //shared_ptr
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 
-struct connection_error: public std::exception {
-		std::string message_;
-		connection_error(std::string message):message_(message){};
-		const char * what () const throw() {
-			std::string temp("Unable to connect: ");
-			temp += message_;
-			return temp.data();}; };
-
-struct status_error: public std::exception {
-	unsigned int code_;
-	std::string message_;
-	status_error(unsigned int code, std::string message):code_(code),message_(message){};
-	const char * what () const throw() {
-		std::string temp("Invalid status code: ");
-		temp += code_;
-		temp += "\n";
-		temp += message_;
-		return temp.data();}; };
 
 class https_client
 {
@@ -38,9 +20,13 @@ public:
 	
 private:
  //   tcp::resolver resolver_;
-    boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
-    boost::asio::io_service io_service_;
-    boost::asio::ssl::context ctx_;
+ 	using boost::asio::ssl::stream;
+ 	using boost::asio::ip::tcp::socket;
+    using boost::asio::io_service;
+    //using boost::asio::ssl:context;
+    std::shared_ptr<stream<socket>> socket_p;
+    std::shared_ptr<io_service> io_service_p;
+    //std::shared_ptr<context> ctx_p;
     std::string http_version_;
     unsigned int status_code_;
     std::string status_message_;
@@ -51,7 +37,7 @@ private:
     unsigned int readInt();
     std::string readHeaders();
     std::string readAll();
-    void write(std::string data){boost::asio::write(socket_,boost::asio::buffer(data));};
+    void write(std::string data){boost::asio::write(*socket_p,boost::asio::buffer(data));};
 };
 
 #endif
