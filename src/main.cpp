@@ -8,10 +8,11 @@ using namespace std;
 try {
 	
 	if (argc != 2) throw "argument usage error";
-	sec::sec s(argv[1]);}
+
+	sec::sec s(argv[0]);}
 catch (exception& e)
 {
-//cout << e.what();	
+cout << e.what();	
 }
 
 }
