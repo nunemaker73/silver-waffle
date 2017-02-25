@@ -4,12 +4,11 @@
 
 int main (int argc, char *argv[])
 {
-using namespace sec;
 using namespace std;
 try {
 	
 	if (argc != 2) throw "argument usage error";
-	sec s(argv[1]);}
+	sec::sec s(argv[1]);}
 }
 catch (exception& e)
 {
