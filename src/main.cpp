@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 #include "sec.h"
 
 int main (int argc, char *argv[])
@@ -7,10 +8,8 @@ int main (int argc, char *argv[])
 		std::cout << "Usage : "<< argv[0] << " <stock_symbol>\n";
 	else
 	{
-		std::cout << "Preparing to pull from internet still in main.cpp\n";
-		std::cout << argv[1]<<"\n";
-		std::cout << "calling the sec-info class now\n";
-	  	sec::sec s(argv[1]);
+		try{ sec::sec s(argv[1]);}
+	  	catch (std::exception& e){std::cout << e.what();};
 		
 	}
 }

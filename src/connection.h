@@ -9,7 +9,6 @@ namespace sec {
 class connection{
 private:
 	boost::property_tree::ptree pt;
-	int connect(Url u);
 public:
 	connection(std::string stock_name);
 	connection(Url u);

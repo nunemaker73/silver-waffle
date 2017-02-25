@@ -153,6 +153,20 @@ public:
 
     // Define Query as vector of Key Value pairs
     typedef std::vector<KeyVal> Query;
+    
+    std::string queries() const {
+    	lazy_parse();
+    	std::string s1;
+    	if (m_query.size()<0) {s1 = s1+'?';};
+		for (const auto& q:m_query)
+			{s1+=q.key();s1+="=";s1+=q.val();s1+="&";}
+		return s1;	}
+		
+	std::string path_queries()const{
+		lazy_parse();
+		std::string s1(m_path);
+		s1+=queries();
+		return s1; 	}
 
     // Get a reference to the query vector for read only access
     const Query& query() const {lazy_parse(); return m_query;}
@@ -225,7 +239,6 @@ private:
     mutable std::int8_t m_ip_v;
 };
 
-std::string urlPathQuery(Url u);
 
 
 

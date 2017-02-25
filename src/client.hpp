@@ -1,43 +1,56 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
-#include <iostream>
-#include <istream>
-#include <ostream>
+
 #include <string>
+#include <exception>
 #include <boost/asio.hpp>
-#include <boost/bind.hpp>
 #include <boost/asio/ssl.hpp>
 
+
 using boost::asio::ip::tcp;
+
 
 class client
 {
 public:
-    client(boost::asio::io_service& io_service,
-           boost::asio::ssl::context& context,
-           const std::string& server, const std::string& path);
-    std::string getContent();
-
+    client(const std::string& server, const std::string& path);
+    std::string getContent(){return content_;};
+    unsigned int getStatus(){return status_code_;};
+    std::string getStatus(){return status_message_;};
+    std::string getHeaders(){return headers_;};
+    std::string getHttpVersion(){return http_version_;};
+	struct connection_error: public exception {
+		std::string message_;
+		connection_error(std::string message):message_(message){};
+		const char * what () const throw() {
+			std::string temp("Unable to connect: ");
+			temp += message_;
+			return temp;}; };
+	struct status_error: public exception {
+		unsigned int code_
+		std::string message_;
+		status_error(unsigned int code, std::string message):code_(code),message_(message){};
+		const char * what () const throw() {
+			std::string temp("Invalid status code: ");
+			temp += code_;
+			temp += "\n";
+			temp += message_;
+			return temp;}; };	
+	
 private:
-
-    void handle_resolve(const boost::system::error_code& err,
-                        tcp::resolver::iterator endpoint_iterator);
-    bool verify_certificate(bool preverified,
-                            boost::asio::ssl::verify_context& ctx);
-    void handle_connect(const boost::system::error_code& err);
-    void handle_handshake(const boost::system::error_code& error);
-    void handle_write_request(const boost::system::error_code& err);
-    
-    void handle_read_status_line(const boost::system::error_code& err);
-    void handle_read_headers(const boost::system::error_code& err);
-    void handle_read_content(const boost::system::error_code& err);
-
-    tcp::resolver resolver_;
+ //   tcp::resolver resolver_;
     boost::asio::ssl::stream<boost::asio::ip::tcp::socket> socket_;
-    boost::asio::streambuf request_;
-    boost::asio::streambuf status_;
-    boost::asio::streambuf headers_;
-    boost::asio::streambuf content_;
+    std::string http_version_;
+    unsigned int status_code_;
+    std::string status_message_;
+    std::string headers_;
+    std::string content_;
+    std::string readLine();
+    std::string readWord();
+    unsigned int readInt();
+    std::string readHeaders();
+    std::string readAll();
+    write(std::string data){boost::asio::write(s,boost::asio::buffer(data));};
 };
 
 #endif
