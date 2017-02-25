@@ -26,7 +26,7 @@ client::client(const std::string& server, const std::string& path)
 	s.handshake(client);
 	
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
-	write(data);
+	writeData(data);
 	http_version_ = readWord();
 	status_code_ = readInt();
 	status_message_=readLine();
