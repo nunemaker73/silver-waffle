@@ -16,10 +16,10 @@ socket_(io_service_,ctx_)
 	
 	
 	//	Establish a connection to the server
-	s.connect(host,"https");
-	if (!s) throw connection_error(s.error().message(});
+	socket_.connect(host,"https");
+	if (!socket_) throw connection_error(socket_.error().message(});
 	
-	s.handshake(client);
+	socket_.handshake(client);
 	
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
@@ -36,7 +36,7 @@ std::string readLine()
 {
 	using boost::asio;
 	streambuf b;
-	read_until(s,b,"\r\n");
+	read_until(socket_,b,"\r\n");
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
