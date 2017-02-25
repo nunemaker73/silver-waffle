@@ -17,10 +17,9 @@ socket_(io_service_,ctx_)
 	
 	//	Establish a connection to the server
 	//socket_.connect(host,"https");
-	//if (!socket_) throw connection_error(socket_.error().message(});
-	
-	socket_.handshake(client);
-	
+	//if (!socket_) throw connection_error(socket_.error().message(})
+	socket_.handshake (boost::asio::ssl::stream<boost::asio::ip::tcp::socket>::client);
+
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + path + "r\nConnection: close\r\n\r\n";
 	write(data);
 	http_version_ = readWord();
