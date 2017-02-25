@@ -6,7 +6,7 @@
 
 struct basic_error: public std::exception {
 		std::string message_;
-		connection_error(std::string message):message_(message){};
+		basic_error(std::string message):message_(message){};
 		const char * what () const throw() {
-			return temp.data();}; };
+			return message_.data();} }
 #endif
