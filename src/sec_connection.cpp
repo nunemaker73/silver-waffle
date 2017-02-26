@@ -27,11 +27,11 @@ sec::connection::connection(std::string stock_symbol)
 {
 	using SimpleWeb::HTTPS;
 	
-	std::string urlstring="/";
-	//urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
-    SimpleWeb::Client<HTTPS> c("www.nunemakercpa.com");
+	//std::string urlstring="/";
+	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+    SimpleWeb::Client<HTTPS> c("www.sec.gov");
     std::shared_ptr<SimpleWeb::Client<HTTPS>::Response> response_p;
-    std::cout << urlstring;
+    std::cout << urlstring<<"\n";
     response_p = c.request(urlstring);
 	std::cout  << response_p->http_version <<"\t" << response_p->status_code<<"\n";
 	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
