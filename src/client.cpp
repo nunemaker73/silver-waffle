@@ -55,11 +55,12 @@ https_client::https_client(const std::string& server, const std::string& path)
 	http_version_=lines[0].substr(0,lines[0].find_first_of(" "));
 	status_code_ = std::stoi(lines[0].substr(lines[0].find_first_of(" ")+1));
 	int i=1;
-	do {
-		headers_=headers_+lines[i];
-		i++;
-	} until (lines[i]=="\r\n");
+	for (i=1; lines[i]!="\r\n";i++) 
+		{headers_=headers_+lines[i];}
 	std::cout << "Headers read next lines\n" << headers_;
+	i++;
+	for (i; i<lines.size();i++) 
+		{content_=content_+lines[i];}
 	
 }
 std::string https_client::readLine()
