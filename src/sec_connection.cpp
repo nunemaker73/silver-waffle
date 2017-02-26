@@ -26,7 +26,7 @@
 sec::connection::connection(std::string stock_symbol)
 {
 	std::string urlstring;
-	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+	urlstring = "/cgi-bin/";//browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
     https_client c("www.sec.gov", urlstring);
     std::string s;
 	s=c.getContent();
