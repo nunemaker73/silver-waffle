@@ -48,8 +48,8 @@ https_client::https_client(const std::string& server, const std::string& path)
 		std::string st;
 		read(*socket_p, boost::asio::buffer(st));
 		std::cout << "read the socket\n";
-		//std::istream is(&b);
-		for(int i=0;is;i++) {std::getline(st,lines[i]);}
+		std::istream is(&st);
+		for(int i=0;is;i++) {std::getline(is,lines[i]);}
 	}
 	
 	std::cout << "Finished readlines\n";
