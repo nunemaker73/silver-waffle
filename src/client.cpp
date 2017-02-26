@@ -5,7 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/asio/ssl.hpp>
-#include <boost/system/error.hpp>
+#include <boost/system.hpp>
 #include "error.hpp"
 #include "client.hpp"
 
