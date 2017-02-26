@@ -5,6 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
 #include <boost/asio/ssl.hpp>
+#include <boost/system/error.hpp>
 #include "error.hpp"
 #include "client.hpp"
 
@@ -40,23 +41,43 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::cout << "path: "<<path << "\n";
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + server+"\r\nConnection: close\r\n\r\n";
 	write(data);
-	std::cout << "readword next:\n";
-	http_version_ = readLine();
-	//std::cout << "readInt next\n";
-	//status_code_ = readInt();
-	std::cout << "message line next readLine 46\n";
-	//status_message_=readLine();
-	std::cout << "http_version: " << http_version_ << "\n";
-//	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
-//	if (status_code_ !=200) throw status_error(status_code_,readLine());
-	headers_ = readHeaders();
-	content_ = readAll();
+	std::cout << "readlines next:\n";
+	std::vector<std::string> lines;
+	do{
+		lines[i] = readLine();
+		if lines[i] =="EOF"
+		{
+			lines.pop_back();
+			break;
+		}
+	}
+
+	std::cout << "Finished readlines\n";
+	
+	http_version_=lines[0].substr(0,lines[0].find_first_of(" "));
+	status_code << lines[0].substr(lines[0].find_first_of(" ")+1);
+	int i=1;
+	do {
+		headers_=headers+lines[i];
+		i++;
+	} until (lines[i]=="\r\n");
+	std::cout << "Headers read next lines\n" << headers_;
+	
 }
 std::string https_client::readLine()
 {
 	using namespace boost::asio;
 	streambuf b;
+	try{
 	read_until(*socket_p,b,"\n");
+	}
+	catch (boost::system::error& e)
+	{
+		if (e.what()=="End of File") 
+			return "EOF";
+		else throw e;
+	}
+	
 	std::istream is(&b);
 	std::string line;
 	std::getline(is,line);
@@ -68,27 +89,18 @@ std::string https_client::readHeaders()
 {
 	using namespace boost::asio;
 	streambuf b;
+	std::cout << "preparing to read headers";
 	read_until(*socket_p,b,"\r\n\r\n");
 	std::istream is(&b);
-	std::string data="";
-	for (std::string line; std::getline(is,line); ){
-		if (line.size()<3) break;
-		data+=line;}
-	
+	std::string data;
+	is >> data;
 	std::cout << data << "\n";
 	return data;
 }
 
 std::string https_client::readWord()
 {
-	using namespace boost::asio;
-	streambuf b;
-	read_until(*socket_p,b," ");
-	std::istream is(&b);
-	std::string line;
-	std::getline(is,line);
 	
-	std::cout << line << "\treadWord\n";
 	return line;
 }
 
