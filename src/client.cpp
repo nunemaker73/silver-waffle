@@ -14,6 +14,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 {
 	using namespace boost::asio;
 	std::string data;
+	std::vector<std::string> lines;
 	
 // Create a context that uses the default paths for
 // finding CA certificates.
@@ -41,24 +42,21 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::cout << "path: "<<path << "\n";
 	data =  "GET "+ path +" HTTP/1.0\r\nHost: " + server+"\r\nConnection: close\r\n\r\n";
 	write(data);
-	std::cout << "readlines next:\n";
-	std::vector<std::string> lines;
-	do{
-		lines[i] = readLine();
-		if lines[i] =="EOF"
-		{
-			lines.pop_back();
-			break;
-		}
+	std::cout << "getting response:\n";
+	{
+		streambuf b;
+		read(*socket_p, b);
+		std::istream is(&b);
+		for(int i=0;is;i++) {std::getline(is,lines[i];}
 	}
-
+	
 	std::cout << "Finished readlines\n";
 	
 	http_version_=lines[0].substr(0,lines[0].find_first_of(" "));
-	status_code << lines[0].substr(lines[0].find_first_of(" ")+1);
+	status_code_ << lines[0].substr(lines[0].find_first_of(" ")+1);
 	int i=1;
 	do {
-		headers_=headers+lines[i];
+		headers_=headers_+lines[i];
 		i++;
 	} until (lines[i]=="\r\n");
 	std::cout << "Headers read next lines\n" << headers_;
