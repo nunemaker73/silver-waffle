@@ -47,7 +47,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 		streambuf b;
 		read(*socket_p, b);
 		std::istream is(&b);
-		for(int i=0;is;i++) {std::getline(is,lines[i];}
+		for(int i=0;is;i++) {std::getline(is,lines[i]);}
 	}
 	
 	std::cout << "Finished readlines\n";
