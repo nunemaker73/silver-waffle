@@ -39,8 +39,8 @@ sec::connection::connection(std::string stock_symbol)
 
 sec::connection::connection(Url u)
 {
-	https_client c(u.host(),u.path_queries());
-    std::string s;
-	s=c.getContent();
-	boost::property_tree::xml_parser::read_xml(s, pt);	
+	//https_client c(u.host(),u.path_queries());
+    //std::string s;
+	//s=c.getContent();
+	//boost::property_tree::xml_parser::read_xml(s, pt);	
 }
