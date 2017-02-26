@@ -27,7 +27,7 @@ sec::connection::connection(std::string stock_symbol)
 {
 	using SimpleWeb::HTTPS;
 	
-	//std::string urlstring="/";
+	std::string urlstring;
 	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
     SimpleWeb::Client<HTTPS> c("www.sec.gov");
     std::shared_ptr<SimpleWeb::Client<HTTPS>::Response> response_p;
