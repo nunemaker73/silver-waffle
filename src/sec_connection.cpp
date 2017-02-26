@@ -19,18 +19,22 @@
 #include <iostream>
 #include <boost/property_tree/xml_parser.hpp>
 #include "connection.h"
-#include "client.hpp"
+#include "client_https.hpp"
 
 
 
 sec::connection::connection(std::string stock_symbol)
 {
+	using SimpleWeb::HTTPS;
+	
 	std::string urlstring;
-	urlstring = "/index.html";//browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
-    https_client c("www.nunemakercpa.com", urlstring);
-    std::string s;
-	s=c.getContent();
-	boost::property_tree::xml_parser::read_xml(s, pt);
+	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
+    SimpleWeb::Client<HTTPS> c("www.sec.gov");
+    std::shared_ptr<SimpleWeb::Client<HTTPS>::Response> response_p;
+    response_p = c.request(urlstring);
+	std::cout  << response_p->http_version;
+	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
+	
 }
 
 sec::connection::connection(Url u)
