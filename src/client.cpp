@@ -112,7 +112,8 @@ std::string https_client::readAll()
 	streambuf b;
 	read(*socket_p, b);
 	std::istream is(&b);
-	std::string data(streambuf_iterator<char>(b), {});
+	std::string data;
+	is >> data;
 	//std::getline(is,data);
 	
 	std::cout << data<< "\n";
