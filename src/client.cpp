@@ -53,7 +53,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	std::cout << "Finished readlines\n";
 	
 	http_version_=lines[0].substr(0,lines[0].find_first_of(" "));
-	status_code_ = std::stroi(lines[0].substr(lines[0].find_first_of(" ")+1));
+	status_code_ = std::stoi(lines[0].substr(lines[0].find_first_of(" ")+1));
 	int i=1;
 	do {
 		headers_=headers_+lines[i];
