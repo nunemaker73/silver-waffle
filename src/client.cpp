@@ -45,10 +45,10 @@ https_client::https_client(const std::string& server, const std::string& path)
 	
 	std::cout << "getting response:\n";
 	{
-		std::string st;
-		read(*socket_p, boost::asio::buffer(st));
+		streambuf b;
+		read(*socket_p, boost::asio::buffer(b));
 		std::cout << "read the socket\n";
-		std::istream is(&st);
+		std::istream is(&b);
 		for(int i=0;is;i++) {std::getline(is,lines[i]);}
 	}
 	
