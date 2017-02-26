@@ -54,6 +54,8 @@ https_client::https_client(const std::string& server, const std::string& path)
 	
 	http_version_=lines[0].substr(0,lines[0].find_first_of(" "));
 	status_code_ = std::stoi(lines[0].substr(lines[0].find_first_of(" ")+1));
+	std::cout<< "HTTP version: " << http_version_ <<"\n";
+	std::cout<<"Status Code: " << status_code_ << "\n";
 	int i=1;
 	for (i=1; lines[i]!="\r\n";i++) 
 		{headers_=headers_+lines[i];}
@@ -62,71 +64,5 @@ https_client::https_client(const std::string& server, const std::string& path)
 	for (i; i<lines.size();i++) 
 		{content_=content_+lines[i];}
 	
-}
-std::string https_client::readLine()
-{
-	using namespace boost::asio;
-	streambuf b;
-	try{
-	read_until(*socket_p,b,"\n");
-	}
-	catch (boost::system::error& e)
-	{
-		if (e.what()=="End of File") 
-			return "EOF";
-		else throw e;
-	}
 	
-	std::istream is(&b);
-	std::string line;
-	std::getline(is,line);
-	std::cout << line << "\n";
-	return line;
-}
-
-std::string https_client::readHeaders()
-{
-	using namespace boost::asio;
-	streambuf b;
-	std::cout << "preparing to read headers";
-	read_until(*socket_p,b,"\r\n\r\n");
-	std::istream is(&b);
-	std::string data;
-	is >> data;
-	std::cout << data << "\n";
-	return data;
-}
-
-std::string https_client::readWord()
-{
-	
-	return line;
-}
-
-unsigned int https_client::readInt()
-{
-	using namespace boost::asio;
-	streambuf b;
-	read_until(*socket_p,b,"\n");
-	std::istream is(&b);
-	std::string line;
-	std::getline(is,line);
-	
-	std::cout << line << "\readInt\n";
-	unsigned int ret = std::stoi(line);
-	return ret;
-}
-
-std::string https_client::readAll()
-{
-	using namespace boost::asio;
-	streambuf b;
-	read(*socket_p, b);
-	std::istream is(&b);
-	std::string data;
-	is >> data;
-	//std::getline(is,data);
-	
-	std::cout << data<< "\n";
-	return data;
 }

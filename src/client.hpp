@@ -30,11 +30,6 @@ private:
     std::string status_message_;
     std::string headers_;
     std::string content_;
-    std::string readLine();
-    std::string readWord();
-    unsigned int readInt();
-    std::string readHeaders();
-    std::string readAll();
     void write(std::string data){boost::asio::write(*socket_p,boost::asio::buffer(data));};
 };
 
