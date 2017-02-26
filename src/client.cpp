@@ -45,7 +45,7 @@ https_client::https_client(const std::string& server, const std::string& path)
 	//std::cout << "readInt next\n";
 	//status_code_ = readInt();
 	std::cout << "message line next readLine 46\n";
-	status_message_=readLine();
+	//status_message_=readLine();
 	std::cout << "http_version: " << http_version_ << "\n";
 //	if (http_version_.substr(0,5) != "HTTP/") throw "Invalid response\n";
 //	if (status_code_ !=200) throw status_error(status_code_,readLine());
@@ -72,6 +72,7 @@ std::string https_client::readHeaders()
 	std::istream is(&b);
 	std::string data="";
 	for (std::string line; std::getline(is,line); ){
+		if (line.size()<3) break;
 		data+=line;}
 	
 	std::cout << data << "\n";
@@ -111,8 +112,8 @@ std::string https_client::readAll()
 	streambuf b;
 	read(*socket_p, b);
 	std::istream is(&b);
-	std::string data;
-	std::getline(is,data);
+	std::string data(streambuf_iterator<char>(b), {});
+	//std::getline(is,data);
 	
 	std::cout << data<< "\n";
 	return data;
