@@ -24,7 +24,6 @@
 
 #include <string>
 #include <boost/property_tree/ptree.hpp>
-#include "connection.h"
 #include "url.hpp"
 
 namespace sec{
