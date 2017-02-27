@@ -51,7 +51,7 @@ sec::report::report(std::string stock_symbol)
 
 //    XMLPlatformUtils::Terminate();
 	
-	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
+	boost::property_tree::xml_parser::read_xml(response_p->content.rdbuf(), pt);
 	std::cout << "read property tree";
 }
 
