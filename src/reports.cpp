@@ -17,6 +17,7 @@
 
 #include <string>
 #include <iostream>
+#include <ofstream>
 #include <iterator>
 #include <boost/property_tree/xml_parser.hpp>
 #include "sec.hpp"
@@ -38,7 +39,9 @@ sec::report::report(std::string stock_symbol)
 	//std::cout << response_p->content.rdbuf();
 
 	std::string data(std::istream_iterator<char>(response_p->content),std::istream_iterator<char>());
-	std::stringstream ss(data);
+	std::ofstream of("data.xml");
+	of << data;
+	of.close();
 	//std::cout << data;
 //	try { XMLPlatformUtils::Initialize();}
 //      catch (const XMLException& toCatch) {std::cout<<toCatch.what()<<"\n";}
@@ -51,7 +54,7 @@ sec::report::report(std::string stock_symbol)
 
 //    XMLPlatformUtils::Terminate();
 	
-	boost::property_tree::xml_parser::read_xml(ss, pt);
+	boost::property_tree::xml_parser::read_xml("data.xml", pt);
 	std::cout << "read property tree";
 }
 
