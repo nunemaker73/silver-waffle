@@ -3,15 +3,15 @@
 
 #include <exception>
 #include <string>
-
-struct basic_error: public std::exception {
+using std::exception;
+struct basic_error: public exception {
 		std::string message_;
 		basic_error(std::string message):message_(message){};
 		const char * what () const throw() {
 			return message_.data();} };
 			
 
-struct connection_error: public std::exception {
+struct connection_error: public exception {
 		std::string message_;
 		connection_error(std::string message):message_(message){};
 		const char * what () const throw() {
@@ -19,7 +19,7 @@ struct connection_error: public std::exception {
 			temp += message_;
 			return temp.data();} };
 
-struct status_error: public std::exception {
+struct status_error: public exception {
 	unsigned int code_;
 	std::string message_;
 	status_error(unsigned int code, std::string message):code_(code),message_(message){};

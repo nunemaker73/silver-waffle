@@ -18,15 +18,15 @@
 #include <string>
 #include <iostream>
 #include <boost/property_tree/xml_parser.hpp>
-#include "connection.h"
+#include "sec.hpp"
 #include "client_https.hpp"
 
 
 
-sec::connection::connection(std::string stock_symbol)
+sec::report::report(std::string stock_symbol)
 {
 	using SimpleWeb::HTTPS;
-	
+	//using xercesc;
 	std::string urlstring;
 	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
     SimpleWeb::Client<HTTPS> c("www.sec.gov");
@@ -35,11 +35,25 @@ sec::connection::connection(std::string stock_symbol)
     response_p = c.request("GET",urlstring);
 	std::cout  << response_p->http_version <<"\t" << response_p->status_code<<"\n";
 	//std::cout << response_p->content.rdbuf();
-	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
-	std::cout << "read property tree";
+
+	std::string data(std::istream::iterator<char>(resonse_p->content.rdbuf(),std::istream::iterator<char>());
+	std::cout << data;
+//	try { XMLPlatformUtils::Initialize();}
+//      catch (const XMLException& toCatch) {std::cout<<toCatch.what()<<"\n";}
+//    DOMImplementation * impl = DOMImplementation::getImplementation();
+//    DOMLSParser *parser = (DOMImplementationLS*)impl)->createLSParser(DOMImplementation::MODE_SYNCHRONOUS, 0);
+//    DOMDocument *doc;
+    
+//    Wrapper4InputSource source (new xMemBufInputSource((const XMLByte *) (myxml.c_str()), myxml.size(), "A name");
+//    parser->parse(&source);
+
+//    XMLPlatformUtils::Terminate();
+	
+	//boost::property_tree::xml_parser::read_xml(response_p->content, pt);
+//	std::cout << "read property tree";
 }
 
-sec::connection::connection(Url u)
+sec::report::report(Url u)
 {
 	//https_client c(u.host(),u.path_queries());
     //std::string s;

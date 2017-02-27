@@ -23,20 +23,25 @@
 */
 
 #include <string>
+#include <boost/property_tree/ptree.hpp>
 #include "connection.h"
 #include "url.hpp"
 
 namespace sec{
 
-class report: public connection
+class report
 {
+private:
+	boost::property_tree::ptree pt;
 public:
-	report(Url u):connection(u){};
+	report(std::string stock_name);
+	report(Url u);
+	std::string getFact(std::string key){pt.get<std::string>(key);};
 };
 
 class sec {
 private:
-	connection data;
+	report data;
 	std::vector<report> reports;
 public:
 	std::string symbol;
