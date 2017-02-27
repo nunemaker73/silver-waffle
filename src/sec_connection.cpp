@@ -35,8 +35,8 @@ sec::connection::connection(std::string stock_symbol)
     response_p = c.request("GET",urlstring);
 	std::cout  << response_p->http_version <<"\t" << response_p->status_code<<"\n";
 	//std::cout << response_p->content.rdbuf();
-	boost::property_tree::xml_parser::read_xml(response_p->content.rdbuf(), pt);
-	
+	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
+	std::cout << "read property tree";
 }
 
 sec::connection::connection(Url u)
