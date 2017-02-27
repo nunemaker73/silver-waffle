@@ -37,9 +37,9 @@ sec::report::report(std::string stock_symbol)
 	std::cout  << response_p->http_version <<"\t" << response_p->status_code<<"\n";
 	//std::cout << response_p->content.rdbuf();
 
-	std::string data(std::istream_iterator<char>(response_p->content),std::istream_iterator<char>());
-	std::stringstream ss(data);
-	std::cout << data;
+	//std::string data(std::istream_iterator<char>(response_p->content),std::istream_iterator<char>());
+	//std::stringstream ss(data);
+	//std::cout << data;
 //	try { XMLPlatformUtils::Initialize();}
 //      catch (const XMLException& toCatch) {std::cout<<toCatch.what()<<"\n";}
 //    DOMImplementation * impl = DOMImplementation::getImplementation();
@@ -51,7 +51,7 @@ sec::report::report(std::string stock_symbol)
 
 //    XMLPlatformUtils::Terminate();
 	
-	boost::property_tree::xml_parser::read_xml(ss, pt);
+	boost::property_tree::xml_parser::read_xml(response_p->content, pt);
 	std::cout << "read property tree";
 }
 
