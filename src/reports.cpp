@@ -17,7 +17,7 @@
 
 #include <string>
 #include <iostream>
-#include <ofstream>
+#include <fstream>
 #include <iterator>
 #include <boost/property_tree/xml_parser.hpp>
 #include "sec.hpp"
