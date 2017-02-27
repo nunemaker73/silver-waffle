@@ -37,7 +37,7 @@ sec::report::report(std::string stock_symbol)
 	std::cout  << response_p->http_version <<"\t" << response_p->status_code<<"\n";
 	//std::cout << response_p->content.rdbuf();
 
-	std::string data(std::istream_iterator<char>(resonse_p->content,std::istream_iterator<char>());
+	std::string data(std::istream_iterator<char>(response_p->content),std::istream_iterator<char>());
 	std::cout << data;
 //	try { XMLPlatformUtils::Initialize();}
 //      catch (const XMLException& toCatch) {std::cout<<toCatch.what()<<"\n";}
