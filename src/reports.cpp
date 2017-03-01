@@ -47,7 +47,7 @@ sec::report::report(std::string stock_symbol)
 	
 }
 
-sec::sec::fillFacts(std::string f_name)
+void sec::sec::fillFacts(std::string f_name)
 {
 	xml_p = new XmlDomDocument(f_name);
     if (doc) {
