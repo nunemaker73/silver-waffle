@@ -23,7 +23,6 @@
 */
 
 #include <string>
-#include <boost/property_tree/ptree.hpp>
 #include "url.hpp"
 
 namespace sec{
@@ -31,25 +30,23 @@ namespace sec{
 class report
 {
 private:
-	boost::property_tree::ptree pt;
 public:
 	report(std::string stock_name);
 	report(Url u);
-	std::string getFact(std::string key){pt.get<std::string>(key);};
+	void virtual fillFacts(std::string f_name);
 };
 
-class sec {
+class sec : public report {
 private:
-	report data;
-	std::vector<report> reports;
+	
 public:
 	std::string symbol;
 	std::string CIK;
 	std::string SIC;
 	std::string SIC_desc;
 	std::string company_name;
-	sec(std::string stock_symbol) :  symbol(stock_symbol),data(stock_symbol);
-		}; 	// Constructor
+	sec(std::string stock_symbol) : report(stock_symbol),symbol(stock_symbol){}; 	// Constructor
+	void fillFacts(std::string f_name);
 }; // class sec
 } // namespace sec
 #endif //!_SEC_H

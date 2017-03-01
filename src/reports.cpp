@@ -42,19 +42,23 @@ sec::report::report(std::string stock_symbol)
 	std::ofstream of("data.xml");
 	of << data;
 	of.close();
-	string value;
-    XmlDomDocument* doc = new XmlDomDocument("./data.xml");
+	
+    fillFacts("data.xml");
+	
+}
+
+sec::sec::fillFacts(std::string f_name)
+{
+	xml_p = new XmlDomDocument(f_name);
     if (doc) {
         for (int i = 0; i < doc->getChildCount("companyFilings", 0, "companyInfo"); i++) {
             CIK= doc->getChildValue("companyInfo", i, "CIK", 0);
             printf("CIK      - %s\n", CIK.c_str());
-            SIC = doc->getChildAttribute("companyInfo", i, "SIC", 0, "lang");
+            SIC = doc->getChildValue("companyInfo", i, "SIC", 0);
             printf("SIC      - %s\n", SIC.c_str());
-        }
-        
+        }   
         delete doc;
     }
-	
 }
 
 sec::report::report(Url u)
