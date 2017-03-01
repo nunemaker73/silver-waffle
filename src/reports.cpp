@@ -20,6 +20,7 @@
 #include <fstream>
 #include <iterator>
 #include <boost/property_tree/xml_parser.hpp>
+#include "XmlDomDocument.h"
 #include "sec.hpp"
 #include "client_https.hpp"
 
@@ -28,7 +29,6 @@
 sec::report::report(std::string stock_symbol)
 {
 	using SimpleWeb::HTTPS;
-	//using xercesc;
 	std::string urlstring;
 	urlstring = "/cgi-bin/browse-edgar?action=getcompany&CIK="+stock_symbol+"&count=10&output=xml";
     SimpleWeb::Client<HTTPS> c("www.sec.gov");
@@ -42,20 +42,19 @@ sec::report::report(std::string stock_symbol)
 	std::ofstream of("data.xml");
 	of << data;
 	of.close();
-	//std::cout << data;
-//	try { XMLPlatformUtils::Initialize();}
-//      catch (const XMLException& toCatch) {std::cout<<toCatch.what()<<"\n";}
-//    DOMImplementation * impl = DOMImplementation::getImplementation();
-//    DOMLSParser *parser = (DOMImplementationLS*)impl)->createLSParser(DOMImplementation::MODE_SYNCHRONOUS, 0);
-//    DOMDocument *doc;
-    
-//    Wrapper4InputSource source (new xMemBufInputSource((const XMLByte *) (myxml.c_str()), myxml.size(), "A name");
-//    parser->parse(&source);
-
-//    XMLPlatformUtils::Terminate();
+	string value;
+    XmlDomDocument* doc = new XmlDomDocument("./data.xml");
+    if (doc) {
+        for (int i = 0; i < doc->getChildCount("companyFilings", 0, "companyInfo"); i++) {
+            CIK= doc->getChildValue("companyInfo", i, "CIK", 0);
+            printf("CIK      - %s\n", CIK.c_str());
+            SIC = doc->getChildAttribute("companyInfo", i, "SIC", 0, "lang");
+            printf("SIC      - %s\n", SIC.c_str());
+        }
+        
+        delete doc;
+    }
 	
-	boost::property_tree::xml_parser::read_xml("data.xml", pt);
-	std::cout << "read property tree";
 }
 
 sec::report::report(Url u)

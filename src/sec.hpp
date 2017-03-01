@@ -48,9 +48,7 @@ public:
 	std::string SIC;
 	std::string SIC_desc;
 	std::string company_name;
-	sec(std::string stock_symbol) :  symbol(stock_symbol),data(stock_symbol) {
-		CIK=data.getFact("companyFilings.companyInfo.CIK");
-		SIC=data.getFact("companyFilings.companyInfo.SIC");
+	sec(std::string stock_symbol) :  symbol(stock_symbol),data(stock_symbol);
 		}; 	// Constructor
 }; // class sec
 } // namespace sec

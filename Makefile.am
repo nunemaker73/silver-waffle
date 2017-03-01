@@ -8,6 +8,7 @@ AM_LDFLAGS=$(BOOST_LDFLAGS) $(OPENSSL_LDFLAGS) $(XERCES_LDFLAGS) $(PTHREAD_CFLAG
 bin_PROGRAMS = 	xbrl
 xbrl_SOURCES = src/url.cpp \
 		src/reports.cpp\
+		src/XmlDomDocument.cpp\
 		src/main.cpp
 
 xbrl_LDADD = $(BOOST_DATE_TIME_LIB) $(BOOST_SYSTEM_LIB) $(OPENSSL_LIBS) 
