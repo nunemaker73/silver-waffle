@@ -11,7 +11,7 @@ xbrl_SOURCES = src/url.cpp \
 		src/XmlDomDocument.cpp\
 		src/main.cpp
 
-xbrl_LDADD = $(BOOST_DATE_TIME_LIB) $(BOOST_SYSTEM_LIB) $(OPENSSL_LIBS) 
+xbrl_LDADD = $(BOOST_DATE_TIME_LIB) $(BOOST_SYSTEM_LIB) $(OPENSSL_LIBS) $(XERCES_LDFLAGS)
 
 pkgconfigdir = /usr/lib/pkgconfig
 pkgconfig_DATA = sec.pc
